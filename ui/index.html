@@ -526,29 +526,30 @@
       </header>
 
       <section class="hero">
-        <div class="eyebrow">Premium bilingual return intelligence</div>
-        <h1>Multilingual return decisions, grounded in customer context.</h1>
+        <div class="eyebrow">Support triage assistant for Mumzworld-style returns</div>
+        <h1>Route return requests safely in English and Arabic.</h1>
         <p class="subtitle">
-          Classify free-text return reasons into refund, exchange, store credit, escalation, or
-          uncertainty with structured bilingual reasoning and customer-ready replies.
+          MumzReturn AI helps support teams classify customer return reasons into refund,
+          exchange, store credit, escalation, or uncertainty, with validated bilingual reasoning
+          and customer-ready replies.
         </p>
       </section>
 
       <section class="summary-strip" aria-label="Evaluation summary">
         <article class="summary-card">
-          <div class="label">Schema Validation</div>
+          <div class="label">Strict schema</div>
           <div class="value">100%</div>
         </article>
         <article class="summary-card">
-          <div class="label">Fallback Support</div>
+          <div class="label">Works without API key</div>
           <div class="value">Rule-safe</div>
         </article>
         <article class="summary-card">
-          <div class="label">Multilingual</div>
+          <div class="label">EN / AR / Mixed</div>
           <div class="value">EN / AR / Mixed</div>
         </article>
         <article class="summary-card">
-          <div class="label">Adversarial Evals</div>
+          <div class="label">50 support cases</div>
           <div class="value">50 cases</div>
         </article>
       </section>
@@ -556,9 +557,9 @@
       <main class="workspace">
         <section class="panel">
           <div class="panel-inner">
-            <div class="panel-header">
+              <div class="panel-header">
               <div>
-                <h2 class="panel-title">Classifier Workspace</h2>
+                <h2 class="panel-title">Support Message</h2>
                 <p class="panel-copy">
                   Paste a customer return reason in English, Arabic, or mixed language. The model
                   returns a structured action, confidence, bilingual reasoning, bilingual reply,
@@ -570,6 +571,7 @@
             <form id="classifierForm" class="input-grid">
               <div>
                 <label for="textInput">Return reason</label>
+                <div class="helper">Paste the exact message a customer sent to support.</div>
                 <textarea
                   id="textInput"
                   name="text"
@@ -620,8 +622,8 @@
             <div class="result-shell">
               <div class="result-topbar">
                 <div>
-                  <h2 class="panel-title">Structured Result</h2>
-                  <p class="panel-copy">Production-shaped output with bilingual reasoning and reply text.</p>
+                  <h2 class="panel-title">Recommended Action</h2>
+                  <p class="panel-copy">Operational routing guidance with bilingual reasoning and reply text.</p>
                 </div>
                 <div id="actionBadge" class="action-badge uncertain">Awaiting input</div>
               </div>
@@ -666,7 +668,7 @@
               </div>
 
               <article class="placeholder-card">
-                <h3>Evaluation-minded by design</h3>
+                <h3>Built for safe support routing</h3>
                 <p>
                   The service validates every response against a strict Pydantic schema, falls back
                   to deterministic rules when no API key is present, and preserves uncertainty
