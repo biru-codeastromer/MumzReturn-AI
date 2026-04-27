@@ -8,3 +8,4 @@ ui-mobile-clean-v2.png
 .vercel/
 .DS_Store
 .env
+.vercel

@@ -21,7 +21,7 @@ Open [http://127.0.0.1:8000](http://127.0.0.1:8000).
 
 Deployed app:
 
-- Vercel production URL: `TBD after deploy`
+- Vercel production URL: [https://mumzreturn-ai.vercel.app](https://mumzreturn-ai.vercel.app)
 
 Quick commands:
 
