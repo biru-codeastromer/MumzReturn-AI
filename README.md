@@ -1,7 +1,5 @@
 # MumzReturn AI
 
-Track: A — AI Engineering Intern
-
 Live app: [https://mumzreturn-ai.vercel.app](https://mumzreturn-ai.vercel.app)
 
 GitHub repo: [https://github.com/biru-codeastromer/MumzReturn-AI](https://github.com/biru-codeastromer/MumzReturn-AI)
@@ -12,7 +10,7 @@ This prototype targets a real Mumzworld support-operations workflow: fast, safe 
 
 ## Setup and Local Run
 
-Under 5 minutes on a clean machine:
+Quick start:
 
 ```bash
 git clone https://github.com/biru-codeastromer/MumzReturn-AI.git
@@ -49,9 +47,9 @@ cat evals/results.json
 
 The checked-in benchmark artifact is the deterministic fallback benchmark so scores stay reproducible even when OpenRouter free-tier capacity varies.
 
-## Loom Walkthrough Flow
+## Example Inputs
 
-Use these 5 inputs in the 3-minute walkthrough:
+Use these inputs to test each routing path:
 
 1. `The stroller wheel arrived broken and the frame is bent.` → `REFUND`
 2. `المقاس صغير وأبغى مقاس أكبر.` → `EXCHANGE`
@@ -124,7 +122,7 @@ Note on live mode:
 Short version:
 
 - I chose return classification because it has immediate business value, crisp routing rules, and measurable uncertainty requirements.
-- I used `meta-llama/llama-3.3-70b-instruct:free` for the LLM path because it is capable enough for bilingual structured classification while remaining easy to run for a take-home.
+- I used `meta-llama/llama-3.3-70b-instruct:free` for the LLM path because it is capable enough for bilingual structured classification while remaining easy to run and validate.
 - I kept the system fully runnable without an API key by shipping a deterministic fallback first, then proving it on evals.
 - I cut fine-tuning, persistence, streaming, and policy-aware workflow integration to stay focused on a reliable demoable core.
 
@@ -190,28 +188,12 @@ Honest usage:
 - The visual direction for the UI was not generated from scratch; I used the supplied AfterQuery screenshots as explicit design references and implemented the interface directly to preserve that look and density.
 - No external translation API was added. Arabic support comes from the bilingual prompt plus native Arabic strings in the fallback path.
 
-## AI Usage Note
-
-- OpenRouter with `meta-llama/llama-3.3-70b-instruct:free` is the intended primary model path for structured bilingual classification.
-- Codex was used as the coding harness for implementation, prompt iteration, eval design, UI refinement, deployment wiring, and README polish.
-- The fallback classifier, eval suite, and output schema were iterated through agent-assisted coding plus manual failure review.
-- Browser automation was used to verify the UI on desktop and mobile after implementation changes.
-- I overruled early rule-matching behavior where evals exposed ambiguity bugs, then tightened the rules before finalizing.
-
 ## Tooling Transparency
 
 - Harness: Codex was used for code implementation, refactors, live deployment verification, and release auditing.
 - Model path: OpenRouter + `meta-llama/llama-3.3-70b-instruct:free` for live structured classification, with deterministic rules as the no-key / rate-limit fallback.
 - Workflow: prompt iteration, schema-first implementation, eval-driven debugging, browser-based UI verification, and final deployment checks.
 - Human override points: I explicitly adjusted the fallback safety heuristics, uncertainty logic, and README positioning after concrete failures and release-audit findings.
-
-## Time Log
-
-- `0.5h`: scoped the problem, designed the output contract, and set the project structure
-- `1.5h`: built the classifier, fallback logic, prompt, dataset, and FastAPI endpoints
-- `1.0h`: built the evaluator, ran failure analysis, and tightened edge-case handling
-- `1.25h`: designed and refined the UI for bilingual demoability and browser verification
-- `0.75h`: docs, packaging, GitHub prep, and deployment setup
 
 ## File Map
 

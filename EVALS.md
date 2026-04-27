@@ -11,7 +11,7 @@ The eval set is designed to answer four practical questions:
 
 ## Rubric
 
-Pass/fail thresholds for a production-credible internship submission:
+Operational thresholds for a production-credible support-routing service:
 
 | Metric | Threshold | Why it matters |
 | --- | ---: | --- |

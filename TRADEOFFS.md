@@ -2,7 +2,7 @@
 
 ## Why Return Classification
 
-I chose return classification because it has high operational leverage for an e-commerce business and a clean evaluation surface for an internship assignment.
+I chose return classification because it has high operational leverage for an e-commerce business and a clean evaluation surface for a narrowly scoped support workflow.
 
 Why this problem works well:
 
@@ -22,7 +22,7 @@ Ideas I did not choose:
 
 ## Why Llama 3.3 70B
 
-I used `meta-llama/llama-3.3-70b-instruct:free` on OpenRouter because it hits a useful balance for a take-home:
+I used `meta-llama/llama-3.3-70b-instruct:free` on OpenRouter because it hits a useful balance for this system:
 
 - Strong enough for structured bilingual classification and concise explanation writing.
 - Accessible through a simple API call, which keeps the project runnable.
@@ -67,11 +67,11 @@ I intentionally did not build:
 Why:
 
 - None of those were necessary to prove core routing quality.
-- They would have spread time away from the assignment’s grading center: correctness, eval rigor, uncertainty handling, and production readiness.
+- They would have spread time away from the core system goals: correctness, eval rigor, uncertainty handling, and production readiness.
 
 ## What I’d Build Next
 
-If this moved beyond the take-home, I would add:
+If this moved beyond the current prototype, I would add:
 
 1. Real data evals from anonymized support logs, including confusion slices by category and language.
 2. A label-audit workflow so uncertain cases and escalations can become new eval seeds.
@@ -91,4 +91,4 @@ The main tradeoff was choosing reliability over breadth:
 - Deterministic no-key fallback
 - Measurable evals that actually changed the implementation
 
-That felt like the strongest way to maximize the assignment rubric instead of shipping a larger but less trustworthy demo.
+That felt like the strongest way to maximize reliability and trustworthiness instead of shipping a larger but less dependable demo.
