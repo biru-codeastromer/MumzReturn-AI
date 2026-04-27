@@ -131,6 +131,22 @@ class ReturnReasonClassifier:
                 used_fallback=True,
             )
 
+        # Safety and fraud language should always override lower-risk routes.
+        if present_categories.get("ESCALATE"):
+            top_matches = present_categories["ESCALATE"]
+            evidence_en, evidence_ar = top_matches[0]
+            result = ClassificationResult(
+                action="ESCALATE",
+                confidence=0.92,
+                reasoning_en=ACTION_REASONING_EN["ESCALATE"].format(evidence=evidence_en),
+                reasoning_ar=ACTION_REASONING_AR["ESCALATE"].format(evidence=evidence_ar),
+                suggested_reply_en=ACTION_REPLY_EN["ESCALATE"],
+                suggested_reply_ar=ACTION_REPLY_AR["ESCALATE"],
+                is_uncertain=False,
+                uncertainty_reason=None,
+            )
+            return ClassifierRun(result=result, schema_valid=True, used_fallback=True)
+
         scored = sorted(
             (
                 (action, len(matches), matches)
@@ -422,7 +438,7 @@ ESCALATE_PATTERNS = [
         "وجود تفاعل تحسسي أو حالة طبية",
     ),
     (
-        r"\bcut my child\b|\bsharp edge\b|\binjury\b|\bhurt my baby\b|\bpiece is sharp\b|جرحت|انجرح|قطعة حادة",
+        r"\bcut my child\b|\bsharp edge\b|\binjury\b|\bhurt my baby\b|\balmost got hurt\b|\bgot hurt\b|\bpiece is sharp\b|جرحت|انجرح|قطعة حادة",
         "an injury or safety incident",
         "وجود إصابة أو حادثة تتعلق بالسلامة",
     ),

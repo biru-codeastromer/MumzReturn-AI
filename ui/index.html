@@ -671,8 +671,9 @@
                 <h3>Built for safe support routing</h3>
                 <p>
                   The service validates every response against a strict Pydantic schema, falls back
-                  to deterministic rules when no API key is present, and preserves uncertainty
-                  instead of guessing on vague or unrelated inputs.
+                  to deterministic rules when no API key is present or the free-tier live model is
+                  rate-limited, and preserves uncertainty instead of guessing on vague or unrelated
+                  inputs.
                 </p>
                 <div class="footer-note" id="statusNote">Waiting for a request.</div>
               </article>

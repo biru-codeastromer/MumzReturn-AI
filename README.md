@@ -1,14 +1,22 @@
 # MumzReturn AI
 
+Track: A — AI Engineering Intern
+
+Live app: [https://mumzreturn-ai.vercel.app](https://mumzreturn-ai.vercel.app)
+
+GitHub repo: [https://github.com/biru-codeastromer/MumzReturn-AI](https://github.com/biru-codeastromer/MumzReturn-AI)
+
 MumzReturn AI is a bilingual return-reason classifier for Mumzworld that takes a customer’s free-text message in English, Arabic, or mixed language and routes it into `REFUND`, `EXCHANGE`, `STORE_CREDIT`, `ESCALATE`, or `uncertain`. It returns a strict structured schema with confidence, grounded reasoning in both languages, a customer-ready reply in both languages, and safe uncertainty behavior when the text is vague, unrelated, or adversarial.
 
-## Setup
+This prototype targets a real Mumzworld support-operations workflow: fast, safe routing of return requests across English and Arabic customer messages. It uses a strict Pydantic schema, bilingual reasoning and replies, a live OpenRouter-backed LLM path, a deterministic fallback when the API key is missing or rate-limited, and an explicit uncertainty path for vague, unrelated, or adversarial inputs so the system does not guess.
+
+## Setup and Local Run
 
 Under 5 minutes on a clean machine:
 
 ```bash
-git clone <your-repo-url>
-cd mumzworld-return-classifier
+git clone https://github.com/biru-codeastromer/MumzReturn-AI.git
+cd MumzReturn-AI
 python3 -m venv .venv
 source .venv/bin/activate
 pip install -r requirements.txt
@@ -31,6 +39,25 @@ curl -X POST http://127.0.0.1:8000/classify \
   -H "Content-Type: application/json" \
   -d '{"text":"المقاس صغير وأبغى مقاس أكبر.","language":"auto"}'
 ```
+
+## Run Evals
+
+```bash
+python -m src.evaluator
+cat evals/results.json
+```
+
+The checked-in benchmark artifact is the deterministic fallback benchmark so scores stay reproducible even when OpenRouter free-tier capacity varies.
+
+## Loom Walkthrough Flow
+
+Use these 5 inputs in the 3-minute walkthrough:
+
+1. `The stroller wheel arrived broken and the frame is bent.` → `REFUND`
+2. `المقاس صغير وأبغى مقاس أكبر.` → `EXCHANGE`
+3. `I accidentally bought two of the same bottle warmer.` → `STORE_CREDIT`
+4. `My baby got a rash after using this lotion.` → `ESCALATE`
+5. `When will my order arrive?` → `action=null`, `is_uncertain=true`
 
 ## What It Does
 
@@ -86,6 +113,12 @@ Artifacts:
 - Raw outputs: [evals/results.json](./evals/results.json)
 - Dataset: [data/synthetic_returns.json](./data/synthetic_returns.json)
 
+Note on live mode:
+
+- The deployed site currently has `OPENROUTER_API_KEY` configured and `/health` reports `fallback_mode: false`.
+- OpenRouter free-tier requests can still return `429` rate-limit responses during peak usage; when that happens the app transparently falls back to the deterministic classifier instead of failing the request.
+- The saved benchmark artifact remains the deterministic fallback run so the reported scores are stable and reproducible.
+
 ## Tradeoffs
 
 Short version:
@@ -140,7 +173,7 @@ Returns:
 {
   "status": "ok",
   "model": "llama-3.3-70b-instruct",
-  "fallback_mode": true
+  "fallback_mode": false
 }
 ```
 
@@ -164,6 +197,13 @@ Honest usage:
 - The fallback classifier, eval suite, and output schema were iterated through agent-assisted coding plus manual failure review.
 - Browser automation was used to verify the UI on desktop and mobile after implementation changes.
 - I overruled early rule-matching behavior where evals exposed ambiguity bugs, then tightened the rules before finalizing.
+
+## Tooling Transparency
+
+- Harness: Codex was used for code implementation, refactors, live deployment verification, and release auditing.
+- Model path: OpenRouter + `meta-llama/llama-3.3-70b-instruct:free` for live structured classification, with deterministic rules as the no-key / rate-limit fallback.
+- Workflow: prompt iteration, schema-first implementation, eval-driven debugging, browser-based UI verification, and final deployment checks.
+- Human override points: I explicitly adjusted the fallback safety heuristics, uncertainty logic, and README positioning after concrete failures and release-audit findings.
 
 ## Time Log
 

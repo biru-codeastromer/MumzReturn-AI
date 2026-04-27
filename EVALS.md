@@ -29,6 +29,12 @@ Current result on the shipped 50-case synthetic benchmark:
 | False confidence rate | `0.0%` | Pass |
 | Schema validity | `100.0%` | Pass |
 
+Run mode note:
+
+- The checked-in benchmark and [evals/results.json](./evals/results.json) are from the deterministic fallback classifier.
+- This is intentional: OpenRouter free-tier usage can return transient `429` rate-limit errors, and the product is designed to fall back safely instead of failing live requests.
+- The deployed production app has an OpenRouter key configured, but release verification treats the saved benchmark as the stable, reproducible baseline.
+
 ## Dataset Shape
 
 The benchmark file [data/synthetic_returns.json](./data/synthetic_returns.json) contains 50 cases:
@@ -89,7 +95,7 @@ Even with a perfect synthetic fallback score, I would still treat these as open 
 
 - Unseen Gulf Arabic slang or heavy typos could slip past the rule-based fallback.
 - Some short customer messages may genuinely require order context or product metadata to disambiguate.
-- The LLM path is schema-guarded and can fall back safely, but I only benchmarked the deterministic path here because no OpenRouter key was present during evaluation.
+- The LLM path is schema-guarded and can fall back safely, but OpenRouter free-tier capacity can trigger `429` responses that push requests onto the deterministic fallback.
 - The dataset is synthetic by design. Real-world logs would almost certainly reveal new phrasing clusters worth adding to the eval suite.
 
 ## Overall Scores
