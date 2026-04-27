@@ -1,0 +1,10 @@
+.venv/
+__pycache__/
+*.pyc
+.playwright-mcp/
+ui-desktop-clean.png
+ui-mobile-clean.png
+ui-mobile-clean-v2.png
+.vercel/
+.DS_Store
+.env

@@ -1,0 +1,810 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>MumzReturn AI</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:wght@500;600;700&family=Fragment+Mono:ital@0;1&family=Inter:wght@400;500;600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #f5f1e8;
+        --ink: #1d1a17;
+        --muted: #6d665d;
+        --line: rgba(29, 26, 23, 0.12);
+        --line-strong: rgba(29, 26, 23, 0.16);
+        --refund: #47624d;
+        --exchange: #48647a;
+        --credit: #9a7a2f;
+        --escalate: #8a4939;
+        --warning: #f5df93;
+        --warning-ink: #644700;
+      }
+
+      * {
+        box-sizing: border-box;
+      }
+
+      body {
+        margin: 0;
+        min-height: 100vh;
+        font-family: "Inter", Arial, sans-serif;
+        color: var(--ink);
+        background:
+          radial-gradient(circle at top left, rgba(194, 176, 146, 0.32), transparent 28%),
+          radial-gradient(circle at top right, rgba(170, 191, 179, 0.24), transparent 24%),
+          linear-gradient(180deg, #faf7f1 0%, var(--bg) 100%);
+      }
+
+      a {
+        color: inherit;
+      }
+
+      .page {
+        max-width: 1280px;
+        margin: 0 auto;
+        padding: 28px 24px 56px;
+      }
+
+      .nav {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        gap: 16px;
+        padding: 6px 0 24px;
+      }
+
+      .brand {
+        display: inline-flex;
+        align-items: center;
+        gap: 12px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.7rem;
+        letter-spacing: -0.03em;
+      }
+
+      .brand-mark {
+        width: 18px;
+        height: 18px;
+        border-radius: 4px;
+        background:
+          linear-gradient(180deg, rgba(29, 26, 23, 0.95), rgba(29, 26, 23, 0.85));
+        position: relative;
+        transform: rotate(45deg);
+      }
+
+      .brand-mark::before,
+      .brand-mark::after {
+        content: "";
+        position: absolute;
+        inset: 3px;
+        border-radius: 3px;
+        border: 1px solid rgba(255, 255, 255, 0.55);
+      }
+
+      .nav-pill {
+        border: 0;
+        border-radius: 999px;
+        padding: 8px 0;
+        color: var(--muted);
+        background: transparent;
+        font-size: 0.88rem;
+        font-family: "Fragment Mono", monospace;
+        letter-spacing: 0.02em;
+      }
+
+      .hero {
+        text-align: center;
+        padding: 76px 0 42px;
+      }
+
+      .eyebrow {
+        color: var(--muted);
+        font-size: 0.82rem;
+        font-family: "Fragment Mono", monospace;
+        letter-spacing: 0.04em;
+        margin-bottom: 18px;
+      }
+
+      h1 {
+        margin: 0 auto 18px;
+        max-width: 880px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: clamp(2.8rem, 6vw, 4.9rem);
+        line-height: 0.94;
+        letter-spacing: -0.045em;
+        font-weight: 600;
+      }
+
+      .subtitle {
+        max-width: 760px;
+        margin: 0 auto;
+        color: var(--muted);
+        font-size: 1.12rem;
+        line-height: 1.75;
+      }
+
+      .summary-strip {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 0;
+        margin: 14px 0 44px;
+        border-top: 1px solid var(--line);
+        border-bottom: 1px solid var(--line);
+      }
+
+      .summary-card {
+        padding: 18px 18px 20px;
+      }
+
+      .summary-card:not(:last-child) {
+        border-right: 1px solid var(--line);
+      }
+
+      .summary-card .label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-family: "Fragment Mono", monospace;
+      }
+
+      .summary-card .value {
+        margin-top: 10px;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.8rem;
+        letter-spacing: -0.03em;
+      }
+
+      .workspace {
+        display: grid;
+        grid-template-columns: minmax(0, 1.03fr) minmax(0, 0.97fr);
+        gap: 36px;
+        align-items: start;
+        border-top: 1px solid var(--line);
+        padding-top: 34px;
+      }
+
+      .panel {
+        border: 0;
+        background: transparent;
+      }
+
+      .panel-inner {
+        padding: 0;
+      }
+
+      .panel-header {
+        display: flex;
+        align-items: flex-start;
+        justify-content: space-between;
+        gap: 16px;
+        margin-bottom: 20px;
+      }
+
+      .panel-title {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 2rem;
+        line-height: 1.05;
+        letter-spacing: -0.04em;
+        margin: 0;
+      }
+
+      .panel-copy {
+        margin: 8px 0 0;
+        color: var(--muted);
+        line-height: 1.7;
+      }
+
+      .input-grid {
+        display: grid;
+        gap: 18px;
+      }
+
+      label {
+        display: block;
+        font-size: 0.95rem;
+        font-weight: 600;
+        margin-bottom: 10px;
+      }
+
+      textarea,
+      select {
+        width: 100%;
+        border: 1px solid var(--line-strong);
+        border-radius: 20px;
+        padding: 18px 18px;
+        font: inherit;
+        color: var(--ink);
+        background: rgba(255, 255, 255, 0.42);
+        transition: border-color 0.22s ease, box-shadow 0.22s ease, transform 0.22s ease;
+      }
+
+      textarea {
+        min-height: 214px;
+        resize: vertical;
+        line-height: 1.7;
+      }
+
+      textarea:focus,
+      select:focus,
+      .demo:focus,
+      .primary-button:focus {
+        outline: none;
+        border-color: rgba(29, 26, 23, 0.36);
+        box-shadow: 0 0 0 5px rgba(89, 79, 61, 0.08);
+      }
+
+      .field-row {
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) auto;
+        gap: 14px;
+        align-items: end;
+      }
+
+      .helper {
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.6;
+      }
+
+      .demos {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 10px;
+      }
+
+      .demo {
+        border: 0;
+        background: transparent;
+        color: var(--ink);
+        border-radius: 999px;
+        padding: 8px 0;
+        cursor: pointer;
+        font: inherit;
+        margin-right: 18px;
+        transition: transform 0.22s ease, background 0.22s ease;
+      }
+
+      .demo:hover,
+      .primary-button:hover {
+        transform: translateY(-1px);
+      }
+
+      .demo:not(:last-child)::after {
+        content: "·";
+        margin-left: 18px;
+        color: rgba(29, 26, 23, 0.38);
+      }
+
+      .primary-button {
+        border: 0;
+        background: #1f1b17;
+        color: #fff9f1;
+        border-radius: 999px;
+        padding: 14px 22px;
+        cursor: pointer;
+        font: inherit;
+        font-weight: 600;
+        min-width: 160px;
+        transition: transform 0.22s ease, opacity 0.22s ease;
+      }
+
+      .primary-button:disabled {
+        cursor: wait;
+        opacity: 0.7;
+      }
+
+      .result-shell {
+        display: grid;
+        gap: 14px;
+      }
+
+      .result-topbar {
+        display: flex;
+        flex-wrap: wrap;
+        align-items: center;
+        justify-content: space-between;
+        gap: 14px;
+      }
+
+      .status-note {
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+
+      .action-badge {
+        display: inline-flex;
+        align-items: center;
+        gap: 10px;
+        border-radius: 999px;
+        padding: 11px 16px;
+        font-size: 0.82rem;
+        font-weight: 700;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: white;
+        font-family: "Fragment Mono", monospace;
+      }
+
+      .action-badge.refund {
+        background: var(--refund);
+      }
+
+      .action-badge.exchange {
+        background: var(--exchange);
+      }
+
+      .action-badge.store_credit {
+        background: var(--credit);
+      }
+
+      .action-badge.escalate {
+        background: var(--escalate);
+      }
+
+      .action-badge.uncertain {
+        background: #736348;
+      }
+
+      .warning {
+        display: none;
+        border: 1px solid rgba(100, 71, 0, 0.15);
+        background: linear-gradient(180deg, rgba(249, 230, 164, 0.78), rgba(249, 223, 136, 0.72));
+        color: var(--warning-ink);
+        border-radius: 20px;
+        padding: 16px 18px;
+        line-height: 1.6;
+      }
+
+      .confidence-card,
+      .section-card,
+      .placeholder-card {
+        border: 0;
+        border-top: 1px solid var(--line);
+        border-radius: 0;
+        background: transparent;
+        padding: 18px 0 0;
+      }
+
+      .confidence-top {
+        display: flex;
+        justify-content: space-between;
+        gap: 12px;
+        align-items: center;
+        margin-bottom: 14px;
+      }
+
+      .confidence-top span:first-child,
+      .section-label {
+        color: var(--muted);
+        font-size: 0.76rem;
+        text-transform: uppercase;
+        letter-spacing: 0.08em;
+        font-family: "Fragment Mono", monospace;
+      }
+
+      .confidence-value {
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.6rem;
+      }
+
+      .bar {
+        position: relative;
+        height: 12px;
+        background: rgba(29, 26, 23, 0.08);
+        border-radius: 999px;
+        overflow: hidden;
+      }
+
+      .bar-fill {
+        position: absolute;
+        inset: 0 auto 0 0;
+        width: 0%;
+        border-radius: inherit;
+        background: linear-gradient(90deg, #3b5c47 0%, #ac8d43 100%);
+        transition: width 0.32s ease;
+      }
+
+      .dual-grid {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 14px;
+      }
+
+      .section-title {
+        margin: 10px 0 0;
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.42rem;
+        letter-spacing: -0.03em;
+      }
+
+      .section-card p {
+        margin: 14px 0 0;
+        line-height: 1.75;
+        color: #322c27;
+      }
+
+      .rtl {
+        direction: rtl;
+        text-align: right;
+      }
+
+      .placeholder-card {
+        color: var(--muted);
+      }
+
+      .placeholder-card h3 {
+        margin: 0 0 10px;
+        color: var(--ink);
+        font-family: "Cormorant Garamond", Georgia, serif;
+        font-size: 1.5rem;
+        letter-spacing: -0.03em;
+      }
+
+      .footer-note {
+        margin-top: 16px;
+        color: var(--muted);
+        font-size: 0.9rem;
+        line-height: 1.7;
+      }
+
+      @media (max-width: 1040px) {
+        .summary-strip,
+        .workspace,
+        .dual-grid {
+          grid-template-columns: 1fr;
+        }
+
+        .summary-card:not(:last-child) {
+          border-right: 0;
+          border-bottom: 1px solid var(--line);
+        }
+
+        .panel-header {
+          flex-direction: column;
+        }
+      }
+
+      @media (max-width: 680px) {
+        .page {
+          padding: 18px 16px 40px;
+        }
+
+        .nav {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 6px;
+        }
+
+        .brand {
+          font-size: 1.45rem;
+        }
+
+        .nav-pill {
+          padding-top: 0;
+        }
+
+        .hero {
+          padding-top: 36px;
+        }
+
+        .panel-inner {
+          padding: 0;
+        }
+
+        .field-row {
+          grid-template-columns: 1fr;
+        }
+
+        .primary-button {
+          width: 100%;
+        }
+
+        .demo {
+          margin-right: 0;
+        }
+
+        .demo::after {
+          display: none;
+        }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="page">
+      <header class="nav">
+        <div class="brand">
+          <span class="brand-mark" aria-hidden="true"></span>
+          <span>MumzReturn AI</span>
+        </div>
+        <div class="nav-pill" id="healthPill">Checking runtime…</div>
+      </header>
+
+      <section class="hero">
+        <div class="eyebrow">Premium bilingual return intelligence</div>
+        <h1>Multilingual return decisions, grounded in customer context.</h1>
+        <p class="subtitle">
+          Classify free-text return reasons into refund, exchange, store credit, escalation, or
+          uncertainty with structured bilingual reasoning and customer-ready replies.
+        </p>
+      </section>
+
+      <section class="summary-strip" aria-label="Evaluation summary">
+        <article class="summary-card">
+          <div class="label">Schema Validation</div>
+          <div class="value">100%</div>
+        </article>
+        <article class="summary-card">
+          <div class="label">Fallback Support</div>
+          <div class="value">Rule-safe</div>
+        </article>
+        <article class="summary-card">
+          <div class="label">Multilingual</div>
+          <div class="value">EN / AR / Mixed</div>
+        </article>
+        <article class="summary-card">
+          <div class="label">Adversarial Evals</div>
+          <div class="value">50 cases</div>
+        </article>
+      </section>
+
+      <main class="workspace">
+        <section class="panel">
+          <div class="panel-inner">
+            <div class="panel-header">
+              <div>
+                <h2 class="panel-title">Classifier Workspace</h2>
+                <p class="panel-copy">
+                  Paste a customer return reason in English, Arabic, or mixed language. The model
+                  returns a structured action, confidence, bilingual reasoning, bilingual reply,
+                  and an uncertainty flag when the evidence is not strong enough.
+                </p>
+              </div>
+            </div>
+
+            <form id="classifierForm" class="input-grid">
+              <div>
+                <label for="textInput">Return reason</label>
+                <textarea
+                  id="textInput"
+                  name="text"
+                  maxlength="500"
+                  placeholder="Example: The stroller wheel arrived broken and my baby cannot use it."
+                ></textarea>
+                <div class="helper">Up to 500 characters. Empty or vague text is rejected on purpose.</div>
+              </div>
+
+              <div class="field-row">
+                <div>
+                  <label for="languageInput">Language hint</label>
+                  <select id="languageInput" name="language">
+                    <option value="auto">Auto-detect</option>
+                    <option value="en">English</option>
+                    <option value="ar">Arabic</option>
+                  </select>
+                </div>
+                <button id="submitButton" class="primary-button" type="submit">Classify reason</button>
+              </div>
+
+              <div>
+                <label>Demo examples</label>
+                <div class="demos">
+                  <button class="demo" type="button" data-language="en" data-text="The stroller wheel arrived broken and the frame is bent.">
+                    Broken on arrival
+                  </button>
+                  <button class="demo" type="button" data-language="ar" data-text="المقاس صغير وأبغى مقاس أكبر.">
+                    Arabic size exchange
+                  </button>
+                  <button class="demo" type="button" data-language="en" data-text="I accidentally bought two of the same bottle warmer.">
+                    Duplicate purchase
+                  </button>
+                  <button class="demo" type="button" data-language="ar" data-text="هذا المنتج سبب لطفلي حساسية قوية.">
+                    Safety escalation
+                  </button>
+                  <button class="demo" type="button" data-language="en" data-text="When will my order arrive?">
+                    Out-of-scope question
+                  </button>
+                </div>
+              </div>
+            </form>
+          </div>
+        </section>
+
+        <section class="panel">
+          <div class="panel-inner">
+            <div class="result-shell">
+              <div class="result-topbar">
+                <div>
+                  <h2 class="panel-title">Structured Result</h2>
+                  <p class="panel-copy">Production-shaped output with bilingual reasoning and reply text.</p>
+                </div>
+                <div id="actionBadge" class="action-badge uncertain">Awaiting input</div>
+              </div>
+
+              <div id="warningBanner" class="warning"></div>
+
+              <div class="confidence-card">
+                <div class="confidence-top">
+                  <span>Confidence</span>
+                  <span id="confidenceValue" class="confidence-value">0%</span>
+                </div>
+                <div class="bar" aria-hidden="true">
+                  <div id="confidenceBar" class="bar-fill"></div>
+                </div>
+                <p id="uncertaintyReason" class="footer-note">No classification has been run yet.</p>
+              </div>
+
+              <div class="dual-grid">
+                <article class="section-card">
+                  <div class="section-label">Reasoning · English</div>
+                  <h3 class="section-title">Grounded rationale</h3>
+                  <p id="reasoningEn">The classifier will explain which rule was triggered and why.</p>
+                </article>
+                <article class="section-card">
+                  <div class="section-label">Reasoning · العربية</div>
+                  <h3 class="section-title rtl">تفسير القرار</h3>
+                  <p id="reasoningAr" class="rtl">سيظهر هنا تفسير القرار باللغة العربية.</p>
+                </article>
+              </div>
+
+              <div class="dual-grid">
+                <article class="section-card">
+                  <div class="section-label">Suggested Reply · English</div>
+                  <h3 class="section-title">Customer-ready message</h3>
+                  <p id="replyEn">The reply stays concise, policy-safe, and grounded in the customer's text.</p>
+                </article>
+                <article class="section-card">
+                  <div class="section-label">Suggested Reply · العربية</div>
+                  <h3 class="section-title rtl">رد مقترح للعميل</h3>
+                  <p id="replyAr" class="rtl">سيظهر هنا الرد المقترح باللغة العربية.</p>
+                </article>
+              </div>
+
+              <article class="placeholder-card">
+                <h3>Evaluation-minded by design</h3>
+                <p>
+                  The service validates every response against a strict Pydantic schema, falls back
+                  to deterministic rules when no API key is present, and preserves uncertainty
+                  instead of guessing on vague or unrelated inputs.
+                </p>
+                <div class="footer-note" id="statusNote">Waiting for a request.</div>
+              </article>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+
+    <script>
+      const form = document.getElementById("classifierForm");
+      const textInput = document.getElementById("textInput");
+      const languageInput = document.getElementById("languageInput");
+      const submitButton = document.getElementById("submitButton");
+      const healthPill = document.getElementById("healthPill");
+      const actionBadge = document.getElementById("actionBadge");
+      const warningBanner = document.getElementById("warningBanner");
+      const confidenceBar = document.getElementById("confidenceBar");
+      const confidenceValue = document.getElementById("confidenceValue");
+      const uncertaintyReason = document.getElementById("uncertaintyReason");
+      const reasoningEn = document.getElementById("reasoningEn");
+      const reasoningAr = document.getElementById("reasoningAr");
+      const replyEn = document.getElementById("replyEn");
+      const replyAr = document.getElementById("replyAr");
+      const statusNote = document.getElementById("statusNote");
+
+      const actionClassMap = {
+        REFUND: "refund",
+        EXCHANGE: "exchange",
+        STORE_CREDIT: "store_credit",
+        ESCALATE: "escalate",
+        UNCERTAIN: "uncertain",
+      };
+
+      async function loadHealth() {
+        try {
+          const response = await fetch("/health");
+          const data = await response.json();
+          healthPill.textContent = data.fallback_mode
+            ? `Fallback mode · ${data.model}`
+            : `OpenRouter live · ${data.model}`;
+        } catch (error) {
+          healthPill.textContent = "API offline";
+        }
+      }
+
+      function setActionBadge(action, isUncertain) {
+        const badgeLabel = isUncertain ? "Uncertain" : action;
+        const badgeClass = isUncertain ? "UNCERTAIN" : action;
+        actionBadge.className = `action-badge ${actionClassMap[badgeClass] || "uncertain"}`;
+        actionBadge.textContent = badgeLabel || "Uncertain";
+      }
+
+      function updateResult(result) {
+        const confidencePercent = Math.round((result.confidence || 0) * 100);
+        setActionBadge(result.action, result.is_uncertain);
+        confidenceValue.textContent = `${confidencePercent}%`;
+        confidenceBar.style.width = `${confidencePercent}%`;
+        uncertaintyReason.textContent = result.is_uncertain
+          ? `Uncertainty reason: ${result.uncertainty_reason || "Not provided"}`
+          : "High-confidence structured classification.";
+        reasoningEn.textContent = result.reasoning_en;
+        reasoningAr.textContent = result.reasoning_ar;
+        replyEn.textContent = result.suggested_reply_en;
+        replyAr.textContent = result.suggested_reply_ar;
+        statusNote.textContent = result.is_uncertain
+          ? "The classifier avoided guessing and asked for clearer evidence."
+          : "The classifier found enough grounded evidence to route the case.";
+
+        if (result.is_uncertain) {
+          warningBanner.style.display = "block";
+          warningBanner.textContent =
+            "Uncertain result: this input was too vague, unrelated, adversarial, or incomplete to classify safely.";
+        } else {
+          warningBanner.style.display = "none";
+          warningBanner.textContent = "";
+        }
+      }
+
+      function showError(message) {
+        setActionBadge(null, true);
+        warningBanner.style.display = "block";
+        warningBanner.textContent = message;
+        confidenceValue.textContent = "0%";
+        confidenceBar.style.width = "0%";
+        uncertaintyReason.textContent = "Request rejected before classification.";
+        reasoningEn.textContent = "The API returned a validation error.";
+        reasoningAr.textContent = "تم رفض الطلب بسبب خطأ في التحقق من البيانات.";
+        replyEn.textContent = "Please correct the input and try again.";
+        replyAr.textContent = "فضلاً صحح المدخلات وحاول مرة ثانية.";
+        statusNote.textContent = "Validation guardrails prevented a low-quality request from being classified.";
+      }
+
+      form.addEventListener("submit", async (event) => {
+        event.preventDefault();
+        submitButton.disabled = true;
+        submitButton.textContent = "Classifying…";
+        statusNote.textContent = "Sending request to classifier.";
+
+        try {
+          const response = await fetch("/classify", {
+            method: "POST",
+            headers: { "Content-Type": "application/json" },
+            body: JSON.stringify({
+              text: textInput.value,
+              language: languageInput.value,
+            }),
+          });
+
+          const data = await response.json();
+          if (!response.ok) {
+            showError(data.detail || "The API could not process this request.");
+            return;
+          }
+
+          updateResult(data);
+        } catch (error) {
+          showError("The API is unavailable right now. Make sure the FastAPI server is running.");
+        } finally {
+          submitButton.disabled = false;
+          submitButton.textContent = "Classify reason";
+        }
+      });
+
+      document.querySelectorAll(".demo").forEach((button) => {
+        button.addEventListener("click", () => {
+          textInput.value = button.dataset.text;
+          languageInput.value = button.dataset.language;
+          textInput.focus();
+        });
+      });
+
+      setActionBadge(null, true);
+      loadHealth();
+    </script>
+  </body>
+</html>

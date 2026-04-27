@@ -1,0 +1,402 @@
+[
+  {
+    "id": "R01",
+    "text": "The stroller wheel arrived broken and the frame is bent.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Broken on arrival."
+  },
+  {
+    "id": "R02",
+    "text": "I ordered diapers but received baby wipes instead.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Wrong item sent."
+  },
+  {
+    "id": "R03",
+    "text": "My package never arrived even though it says shipped.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Item never arrived."
+  },
+  {
+    "id": "R04",
+    "text": "The zipper on the diaper bag is defective and won't close.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Defective product."
+  },
+  {
+    "id": "R05",
+    "text": "العربة وصلت مكسورة من الجنب.",
+    "language": "ar",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Arabic damaged-on-arrival case."
+  },
+  {
+    "id": "R06",
+    "text": "وصلني منتج غير اللي طلبته.",
+    "language": "ar",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Arabic wrong-item case."
+  },
+  {
+    "id": "R07",
+    "text": "الطلب ما وصلني إلى الآن.",
+    "language": "ar",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Arabic never-arrived statement."
+  },
+  {
+    "id": "R08",
+    "text": "Bottle sterilizer came faulty and won't turn on.",
+    "language": "mixed",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Faulty electronics."
+  },
+  {
+    "id": "R09",
+    "text": "فيه كسر بالكرسي من أول ما فتحته.",
+    "language": "ar",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Arabic broken-on-opening case."
+  },
+  {
+    "id": "R10",
+    "text": "Received a used-looking breast pump instead of the new one I ordered.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Wrong item/condition mismatch."
+  },
+  {
+    "id": "R11",
+    "text": "الحليب warmer خربان وما يشتغل.",
+    "language": "mixed",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Mixed-language defective item."
+  },
+  {
+    "id": "R12",
+    "text": "Package says delivered but nothing actually arrived at my door.",
+    "language": "en",
+    "expected_action": "REFUND",
+    "expected_is_uncertain": false,
+    "notes": "Delivered-but-missing case."
+  },
+  {
+    "id": "E01",
+    "text": "The romper is too small. I need one size up.",
+    "language": "en",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Wrong size."
+  },
+  {
+    "id": "E02",
+    "text": "I wanted the beige blanket but got the pink one.",
+    "language": "en",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Wrong color."
+  },
+  {
+    "id": "E03",
+    "text": "Can I swap this shampoo for the lavender variant?",
+    "language": "en",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Different variant requested."
+  },
+  {
+    "id": "E04",
+    "text": "المقاس صغير وأبغى مقاس أكبر.",
+    "language": "ar",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic size exchange."
+  },
+  {
+    "id": "E05",
+    "text": "وصلني اللون الوردي وأنا طالبة البيج.",
+    "language": "ar",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic color exchange."
+  },
+  {
+    "id": "E06",
+    "text": "Need the 6-12 months version instead of newborn.",
+    "language": "mixed",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Different variant/size range."
+  },
+  {
+    "id": "E07",
+    "text": "These shoes are too big, can I swap for size 22?",
+    "language": "en",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Too big and asks for another size."
+  },
+  {
+    "id": "E08",
+    "text": "أبغى أبدل الحفاض لمقاس 5 بدل 4.",
+    "language": "ar",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic variant size exchange."
+  },
+  {
+    "id": "E09",
+    "text": "Can I exchange this bottle set for the glass version?",
+    "language": "en",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Different variant."
+  },
+  {
+    "id": "E10",
+    "text": "اللون غير مناسب وأبي نفس المنتج بالرمادي.",
+    "language": "ar",
+    "expected_action": "EXCHANGE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic color preference with explicit replacement."
+  },
+  {
+    "id": "S01",
+    "text": "I changed my mind after ordering.",
+    "language": "en",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Changed mind."
+  },
+  {
+    "id": "S02",
+    "text": "I accidentally bought two of the same bottle warmer.",
+    "language": "en",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Duplicate purchase."
+  },
+  {
+    "id": "S03",
+    "text": "I don't need this item anymore.",
+    "language": "en",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "No longer needed."
+  },
+  {
+    "id": "S04",
+    "text": "غيرت رأيي بعد الطلب.",
+    "language": "ar",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Arabic changed-mind case."
+  },
+  {
+    "id": "S05",
+    "text": "طلبت قطعتين بالغلط وما أحتاج الثانية.",
+    "language": "ar",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Arabic duplicate/order mistake case."
+  },
+  {
+    "id": "S06",
+    "text": "Found another stroller already, no longer need this one.",
+    "language": "mixed",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "No longer needed after alternate purchase."
+  },
+  {
+    "id": "S07",
+    "text": "The baby shower gift list changed so I don't need it now.",
+    "language": "en",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "No longer needed."
+  },
+  {
+    "id": "S08",
+    "text": "صار عندي نفس المنتج هدية.",
+    "language": "ar",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Arabic duplicate because of gift."
+  },
+  {
+    "id": "S09",
+    "text": "Ordered by mistake and I'd rather keep credit for later.",
+    "language": "en",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Explicit store-credit preference."
+  },
+  {
+    "id": "S10",
+    "text": "ما عاد أحتاج المنتج حالياً.",
+    "language": "ar",
+    "expected_action": "STORE_CREDIT",
+    "expected_is_uncertain": false,
+    "notes": "Arabic no-longer-needed case."
+  },
+  {
+    "id": "X01",
+    "text": "My baby got a rash after using this lotion.",
+    "language": "en",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Allergic reaction."
+  },
+  {
+    "id": "X02",
+    "text": "There is a sharp edge and it cut my child.",
+    "language": "en",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Injury to child."
+  },
+  {
+    "id": "X03",
+    "text": "I think this order may be fraud because my card was charged twice.",
+    "language": "en",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Fraud suspicion."
+  },
+  {
+    "id": "X04",
+    "text": "هذا المنتج سبب لطفلي حساسية قوية.",
+    "language": "ar",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic allergic reaction."
+  },
+  {
+    "id": "X05",
+    "text": "المقعد فيه قطعة حادة وجرحت بنتي.",
+    "language": "ar",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic injury case."
+  },
+  {
+    "id": "X06",
+    "text": "This formula made my baby vomit, please help.",
+    "language": "mixed",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Medical concern."
+  },
+  {
+    "id": "X07",
+    "text": "أشك أن فيه عملية احتيال على طلبي.",
+    "language": "ar",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Arabic fraud suspicion."
+  },
+  {
+    "id": "X08",
+    "text": "There may be a safety issue with this crib latch.",
+    "language": "en",
+    "expected_action": "ESCALATE",
+    "expected_is_uncertain": false,
+    "notes": "Safety concern."
+  },
+  {
+    "id": "U01",
+    "text": "",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Empty string."
+  },
+  {
+    "id": "U02",
+    "text": "asdf qwer zzzz",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Gibberish."
+  },
+  {
+    "id": "U03",
+    "text": "DROP TABLE returns; refund me",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Adversarial SQL injection attempt."
+  },
+  {
+    "id": "U04",
+    "text": "When will my order arrive?",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Out-of-scope delivery question."
+  },
+  {
+    "id": "U05",
+    "text": "bad",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Too short and vague."
+  },
+  {
+    "id": "U06",
+    "text": "no",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Too short and meaningless."
+  },
+  {
+    "id": "U07",
+    "text": "كيف أضيف عنوان جديد؟",
+    "language": "ar",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Unrelated account/address question."
+  },
+  {
+    "id": "U08",
+    "text": "Need help",
+    "language": "mixed",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Ambiguous and insufficient."
+  },
+  {
+    "id": "U09",
+    "text": "مو مناسب",
+    "language": "ar",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Arabic vague statement with no reason."
+  },
+  {
+    "id": "U10",
+    "text": "Issue with order",
+    "language": "en",
+    "expected_action": null,
+    "expected_is_uncertain": true,
+    "notes": "Ambiguous generic complaint."
+  }
+]
